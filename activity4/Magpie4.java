@@ -4,9 +4,9 @@ package activity4;
  * A program to carry on conversations with a human user.
  * This version:
  *<ul><li>
- * 		Uses advanced search for keywords 
+ *         Uses advanced search for keywords 
  *</li><li>
- * 		Will transform statements as well as react to keywords
+ *         Will transform statements as well as react to keywords
  *</li></ul>
  * @author Laurie White
  * @version April 2012
@@ -15,9 +15,9 @@ package activity4;
 public class Magpie4
 {
     /**
-     * Get a default greeting 	
+     * Get a default greeting     
      * @return a greeting
-     */	
+     */    
     public String getGreeting()
     {
         return "Hello, let's talk.";
@@ -60,10 +60,10 @@ public class Magpie4
         {
             // Look for a two word (you <something> me)
             // pattern
-            int psn = findKeyword(statement, "you", 0);
+            int psn = findKeyword(statement, "I", 0);
 
             if (psn >= 0
-            && findKeyword(statement, "me", psn) >= 0)
+            && findKeyword(statement, "you", psn) >= 0)
             {
                 response = transformYouMeStatement(statement);
             }
@@ -113,7 +113,7 @@ public class Magpie4
         return "Would you be really happy if you had " + restOfStatement + "?";
     }
 
-	
+    
     /**
      * Take a statement with "you <something> me" and transform it into 
      * "What makes you think that I <something> you?"
@@ -132,15 +132,15 @@ public class Magpie4
                 .length() - 1);
         }
 
-        int psnOfYou = findKeyword (statement, "you");
-        int psnOfMe = findKeyword (statement, "I", psnOfYou + 3);
+        int psnOfI = findKeyword (statement, "I");
+        int psnOfYou = findKeyword (statement, "you", psnOfI + 1);
 
-        String restOfStatement = statement.substring(psnOfYou + 3, psnOfMe).trim();
+        String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
         return "Why do you " + restOfStatement + " me?";
     }
 
 
-	
+    
     /**
      * Search for one word in phrase.  The search is not case sensitive.
      * This method will check that the given goal is not a substring of a longer string
